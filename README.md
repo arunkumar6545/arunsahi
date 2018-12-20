@@ -12,3 +12,11 @@ this.filteredUsers = this.usersForm
     debounceTime(300),
     switchMap(value => this.appService.search({name: value}, 1))
    );
+
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let user of (filteredUsers | async)?.results" [value]="user">
+    <span>{{ user.name }}</span>
+    <small> | ID: {{user.id}}</small>
+  </mat-option>
+</mat-autocomplete>
