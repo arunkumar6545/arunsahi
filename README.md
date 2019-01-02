@@ -1,22 +1,4 @@
-Using Angular 6 Material Auto-complete With Async Data
-Fetching the options from the server
+Angular change detection strategies
 
-this.usersForm = this.fb.group({
-  userInput: null
-})
+https://blog.angularindepth.com/everything-you-need-to-know-about-change-detection-in-angular-8006c51d206f
 
-this.filteredUsers = this.usersForm
-  .get('userInput')
-  .valueChanges
-  .pipe(
-    debounceTime(300),
-    switchMap(value => this.appService.search({name: value}, 1))
-   );
-
-
-<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-  <mat-option *ngFor="let user of (filteredUsers | async)?.results" [value]="user">
-    <span>{{ user.name }}</span>
-    <small> | ID: {{user.id}}</small>
-  </mat-option>
-</mat-autocomplete>
